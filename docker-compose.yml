@@ -1,0 +1,36 @@
+# version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: dropbox_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword       # Sets the root user's password
+      MYSQL_DATABASE: dropbox_clone_db        # Creates the database 'dropbox_clone_db'
+      MYSQL_USER: dropbox_user                 # Creates a new user 'dropbox_user'
+      MYSQL_PASSWORD: securepassword           # Sets the password for 'dropbox_user'
+    ports:
+      - "3306:3306"                            # Maps port 3306 of the container to port 3306 on the host
+    volumes:
+      - dropbox_mysql_data:/var/lib/mysql      # Persists MySQL data using a Docker volume
+    restart: unless-stopped                    # Restarts the container unless it's explicitly stopped
+
+  web:
+    build: .
+    container_name: dropbox_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code                                 # Mounts the current directory to /code in the container for live updates
+    ports:
+      - "8000:8000"                             # Maps port 8000 of the container to port 8000 on the host
+    depends_on:
+      - db                                       # Ensures the 'db' service starts before 'web'
+    environment:
+      DB_NAME: dropbox_clone_db                  # Database name
+      DB_USER: dropbox_user                       # Database user
+      DB_PASSWORD: securepassword                 # Database user's password
+      DB_HOST: db                                  # Database host (service name defined in docker-compose.yml)
+      DB_PORT: 3306                                # Database port
+
+volumes:
+  dropbox_mysql_data:
