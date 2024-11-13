@@ -395,9 +395,9 @@ This project is licensed under the [MIT License](LICENSE).
 
 For any questions or support, please contact:
 
-- **Name:** Your Name
-- **Email:** your.email@example.com
-- **GitHub:** [yourusername](https://github.com/yourusername)
+- **Name:** Anamay Srivastava
+- **Email:** anamaysri1@gmail.com
+- **GitHub:** [anamaysri1](https://github.com/anamaysri11)
 
 ---
 
