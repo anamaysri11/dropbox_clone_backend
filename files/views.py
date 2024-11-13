@@ -21,22 +21,6 @@ ALLOWED_CONTENT_TYPES = [
 ]
 
 
-# class FileUploadView(APIView):
-#     def post(self, request, format=None):
-#         content_type = request.data['file'].content_type
-#         if content_type not in self.ALLOWED_CONTENT_TYPES:
-#             return Response(
-#                 {'error': 'File type not supported.'},
-#                 status=status.HTTP_400_BAD_REQUEST
-#             )
-#         serializer = FileSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save(
-#                 filename=request.data['file'].name,
-#                 content_type=content_type
-#             )
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class FileUploadView(generics.CreateAPIView):

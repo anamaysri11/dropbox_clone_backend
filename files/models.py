@@ -14,11 +14,7 @@ class File(models.Model):
     def __str__(self):
         return self.filename
 
-# files/models.py
-
-
 def upload_to(instance, filename):
-    # Optionally, customize the upload path
     return f'uploads/{filename}'
 
 class UploadedFile(models.Model):
